@@ -16,6 +16,8 @@ mongoose.connection.on('connected', () => {
 const express = require('express');
 const app = express();
 
+//controllers
+const petCtrl = require('./controllers/pets')
 
 //Middlewar
 const morgan = require('morgan');
@@ -23,7 +25,10 @@ app.use(morgan('dev'));//dev is the comperhansiv show the log
 app.use(express.json());//tell express that will recive the json and pass beacuse will use API 
 
 
-// Routes go here
+// Routes 
+app.use('/pets',petCtrl) // use posstman for testing 
+
+
 app.listen(3000, () => {
   console.log('The express app is ready!');
 });
