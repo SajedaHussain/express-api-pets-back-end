@@ -1,5 +1,5 @@
 //require the modle
-const Pet = require('../model/pet')
+const Track = require('../model/track')
 //express
 const express = require('express')
 //initialize the router
@@ -7,17 +7,17 @@ const router = express.Router()
 
 
 //Creat ===================================================================================
-router.post('/', async (req, res) => {//beacuse the serverjs is already /pets so it become /pets/pets if we put /pets
+router.post('/', async (req, res) => {
     try {
         //use the modl to inser the data into DB
-        const pet = await Pet.create(req.body)
+        const track = await Track.create(req.body)
 
         //response with the new pet data  
-        res.status(201).json({ pet });//.json its same of renderss 200 secsuuful read 201 seccufuly ceated use for postt request
+        res.status(201).json({ track });
     }
     catch (error) {
         console.log(error)
-        res.status(500).json({ error: "failed to create pet " })//json expact the object + just a number to show there is an error
+        res.status(500).json({ error: "failed to create track " })
     }
 })
 
@@ -25,14 +25,14 @@ router.post('/', async (req, res) => {//beacuse the serverjs is already /pets so
 //index ===================================================================================
 router.get('/', async (req, res) => {
     try {
-        const pets = await Pet.find({})
-        res.status(200).json({pets})
+        const track = await Track.find({})
+        res.status(200).json({track})
 
 
     }
     catch (error) {
         console.log(error)
-        res.status(500).json({ error: 'Faild to get pet' })
+        res.status(500).json({ error: 'Faild to get track' })
     }
 })
 
@@ -44,14 +44,14 @@ router.get('/:id' , async (req,res)=>{
         const {id}=req.params
 
         //use the model to find by id
-        const pet = await Pet.findById(id)
+        const track = await Track.findById(id)
 
         //if we ont get the pet respond with 404 else send 200 with pet
-        if(!pet){
-            res.status(404).json({error: 'pet not found'})
+        if(!track){
+            res.status(404).json({error: 'track not found'})
         }//there is no pet
         else{
-            res.status(200).json({pet})
+            res.status(200).json({track})
         }
 
     }
@@ -68,13 +68,13 @@ router.delete('/:id' , async (req,res)=>{
     const {id}=req.params
 
     //try to find and delet the id
-    const pet= await Pet.findByIdAndDelete(id)
+    const track= await Track.findByIdAndDelete(id)
 
-    if(!pet){
-        res.status(404).json({msg:"pet not found"})
+    if(!track){
+        res.status(404).json({msg:"track not found"})
     }
     else{
-    res.status(204).json({msg:"deleted"})}//204 meaans nothing, its secsses but nothing to show because we deleted(use it when you want to show nothing)
+    res.status(200).json({msg:"deleted"})}
  }
  catch(erorr){
     console.log(erorr)
@@ -89,7 +89,7 @@ router.put('/:id' , async (req,res)=>{
     const {id}=req.params
 
     //try to find and update the id
-    const pet= await Pet.findByIdAndUpdate(id, req.body , { new: true,})//first argument for id (find by id) and he second for the updated values(send it to the req.body) the third arrgument because by defult the value is falsex
+    const track= await Track.findByIdAndUpdate(id, req.body , { new: true,})
 
     //send back msg to say updated
     res.status(200).json({msg:"updated"})

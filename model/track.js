@@ -2,22 +2,21 @@
 const mongoose=require('mongoose');
 
 //create the mongoose schema
-const petSchema = new mongoose.Schema({
-    name: {
+const tackSchema = new mongoose.Schema({
+   title: {
     type: String,
     required: true,
   },
-  age: {
+  artist: {
     type: Number,
     min: 0,
     required: true,
-  },
-  breed: String,
+  }
 
 })
 
 //initialize the mongoose model
-const Pet = mongoose.model('Pet', petSchema);
+const Track = mongoose.model('Pet', tackSchema);
 
 //export the model
-module.exports = Pet //use this to export he node js
+module.exports = Track 

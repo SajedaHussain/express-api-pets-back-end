@@ -17,7 +17,7 @@ const express = require('express');
 const app = express();
 
 //controllers
-const petCtrl = require('./controllers/pets')
+const trackCrl = require('./controllers/tracks')
 
 //Middlewar
 const morgan = require('morgan');
@@ -26,7 +26,7 @@ app.use(express.json());//tell express that will recive the json and pass beacus
 
 
 // Routes 
-app.use('/pets',petCtrl) // use posstman for testing 
+app.use('/tracks',trackCrl) // use posstman for testing 
 
 
 app.listen(3000, () => {
